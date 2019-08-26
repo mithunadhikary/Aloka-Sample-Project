@@ -1,0 +1,142 @@
+body{
+  margin:0;
+  padding: 0;
+  font-family: arial;
+}
+#root{
+
+}
+.header{
+  background:#00d1b2;
+  width: 100%;
+  display: inline-block;
+}
+.header h1{
+    margin: 0;
+    padding: 10px 20px;
+    color: #fff;
+    float: left;
+    font-weight: normal;
+}
+
+.header ul{
+  float: right;
+  padding-right: 20px;
+  text-decoration: none;
+}
+.header ul li{
+  float: left;
+  list-style: none;
+  text-decoration: none;
+}
+.header ul li a{
+  color: #ffffffb3;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.header ul li a.active{
+  color: #fff;
+}
+
+.search{
+  margin-top: 30px;
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.search form{
+  width: 45%;
+  margin: auto;
+}
+
+.search .input-text{
+    width: calc(100% - 124px);
+    height: 40px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #e8e0e0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    float: left;
+}
+
+.search .submit{
+    width: 100px;
+    background: #3273dc;
+    border: navajowhite;
+    color: #fff;
+    height: 41px;
+    font-size: 20px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    float: left;
+}
+
+.details-data{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #e8e0e0;
+  flex: 1 1 calc(33% - 4rem);
+  border-radius: 4px;
+}
+
+.details-data .card img{
+    float: left;
+    height: 100px;
+}
+
+.details-data .card .card-details{
+  float: right;
+  width: calc(100% - 70px);
+}
+
+.details-data .card .card-details h2{
+    margin: 0;
+    font-size: 20px;
+}
+
+.details-data .card .card-details p{
+  line-height: 20px;
+}
+
+.details-data .card .favourites{
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.details-data .card .favourites img{
+    float: none;
+    height: 20px;
+}
+.pagination{
+    display: inline-block;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.pagination ul{
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.pagination ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+.pagination ul li a{
+    color: #000;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #ccc;
+    margin-right: 5px;
+}
