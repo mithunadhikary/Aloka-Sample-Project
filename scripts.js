@@ -10,7 +10,9 @@ company_h1.innerHTML = 'Beans Love Beers'
 
 const header_ul = document.createElement('ul')
 header.appendChild(header_ul)
-header_ul.innerHTML = '<li><a class="active" href="#">Home</li><li><a href="#">Favourites</li>'
+var home = 'home'
+var home2 = 'home2'
+header_ul.innerHTML = '<li><a class="active" onclick="page_show('+home+')" href="#">Home</li><li><a onclick="page_show('+home2+')" href="#">Favourites</li>'
 
 const searchBar = document.createElement('div')
 searchBar.setAttribute('class', 'search')
@@ -22,6 +24,11 @@ const detailsData = document.createElement('div')
 detailsData.setAttribute('class','details-data')
 detailsData.setAttribute('id','details-data')
 app.appendChild(detailsData)
+
+global_page = 'home'
+
+var detailsDataId = document.getElementById("details-data");
+detailsDataId.classList.add(global_page);
 
 
 var request = new XMLHttpRequest()
@@ -73,7 +80,10 @@ function render_data(beer){
       image.setAttribute('src',beer.image_url)
 
       const favouritesTag = document.createElement('div')
-      favouritesTag.setAttribute('class', 'favourites')
+      favouritesTag.setAttribute('class', 'favourites')      
+      favouritesTag.setAttribute('id', 'favourites-'+beer.id)      
+     // favouritesTag.setAttribute('onclick',`${fav_data(beer.id)}`)
+      favouritesTag.setAttribute('onclick','fav_data('+beer.id+')')
 
       const favouritesImg = document.createElement('img')
       favouritesImg.setAttribute('src','file:///C:/Users/12178/Desktop/punkapi/images/star.png')
@@ -84,7 +94,6 @@ function render_data(beer){
       const p = document.createElement('p')
       beer.description = beer.description.substring(0, 100)
       p.textContent = `${beer.description}...`
-
       
       detailsData.appendChild(card)
       card.appendChild(favouritesTag)
@@ -93,7 +102,6 @@ function render_data(beer){
       card.appendChild(cardDeatils)
       cardDeatils.appendChild(h2)
       cardDeatils.appendChild(p)
-
 }
 
 request.send()
@@ -102,7 +110,37 @@ function paginationId(pageId) {
    getNewData(pageId);
 }
 
-function getNewData(pageId){
+function page_show(page){
+  document.getElementById('details-data').innerHTML = ""
+  detailsDataId.classList.remove('home');
+  detailsDataId.classList.remove('home2');
+  if(page == home){
+    global_page = home
+    getNewData('1')
+  }else{
+    global_page = home2
+    favourites_page_data(news_array)
+  } 
+
+  detailsDataId.classList.add(global_page);
+}
+
+function favourites_page_data(news_array){
+
+  const fetchPromise = fetch("https://api.punkapi.com/v2/beers?ids="+news_array);
+    fetchPromise.then(response => {
+      return response.json();
+    }).then(people => {
+      document.getElementById('details-data').innerHTML = ""
+      people.forEach(beer => {
+        render_data(beer)
+
+      });
+    });
+
+}
+
+var getNewData= pageId => {
   const fetchPromise = fetch("https://api.punkapi.com/v2/beers?page="+pageId+"&per_page=6");
   fetchPromise.then(response => {
     return response.json();
@@ -114,6 +152,26 @@ function getNewData(pageId){
     });
   });
 }
+
+fav_array = [];
+news_array = [];
+const fav_data= id => {
+
+  var element = document.getElementById("favourites-"+id);
+  element.classList.add("active");
+
+  var index = fav_array.indexOf(id);
+  if (index > -1) {
+    fav_array.splice(index, 1);
+  }else{
+    fav_array.push(id)
+  }
+    
+  news_array = fav_array.join("|") 
+  if(global_page == home2){  
+      favourites_page_data(news_array)
+  } 
+};
 
 // setTimeout(function(){ 
  

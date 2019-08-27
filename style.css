@@ -114,6 +114,13 @@ body{
 .details-data .card .favourites img{
     float: none;
     height: 20px;
+    opacity: .5;
+    cursor: pointer;
+}
+.details-data .card .favourites.active img,
+.details-data.home2 .card .favourites img,
+.details-data .card .favourites img:hover{
+  opacity: 1;
 }
 .pagination{
     display: inline-block;
